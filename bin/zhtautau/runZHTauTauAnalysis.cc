@@ -67,6 +67,7 @@
 #include "TCanvas.h"
 #include "TH1F.h"
 #include "TH2F.h"
+#include "TH3F.h"
 #include "TProfile.h"
 #include "TProfile2D.h"
 #include "TEventList.h"
@@ -1096,6 +1097,7 @@ int main(int argc, char* argv[])
     mon.addHistogram( new TH1F(TString("metsys")+varNames[ivar],                   ";#slash{E}_{T} (GeV);Events/10 GeV",50,0,500));
     mon.addHistogram( new TH2F (TString("AsvfitVSHsvfit_mass")+varNames[ivar],";M_{#tau#tau};M_{ll#tau#tau};Events",nbins,bins,nbins,bins) );
     mon.addHistogram( new TH2F (TString("AsvfitVSHsvfit_mass_alt")+varNames[ivar],";M_{#tau#tau};M_{ll#tau#tau};Events",180,0,1800,180,0,1800) );
+    mon.addHistogram( new TH3F (TString("AsvfitVSHsvfit_shapes")+varNames[ivar],";M_{#tau#tau};M_{ll#tau#tau};cut index",180,0,1800,180,0,1800,optim_Cuts_sumPt.size(),0,optim_Cuts_sumPt.size()) );
   }
 
 
@@ -2541,6 +2543,7 @@ int main(int argc, char* argv[])
             if(passHiggs){
               mon.fillHisto(TString("Hsvfit_shapes")+varNames[ivar],chTagsMain,index,higgsCandH_SVFit.mass(),weight);
               mon.fillHisto(TString("Asvfit_shapes")+varNames[ivar],chTagsMain,index,higgsCand_SVFitMass,weight);
+              mon.fillHisto(TString("AsvfitVSHsvfit_shapes")+varNames[ivar],chTagsMain,higgsCand_SVFitMass,higgsCandH_SVFit.mass(),index,weight);
             } else {   //if ( runSystematics ){
 
               // Control regions

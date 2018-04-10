@@ -15,6 +15,7 @@
 #include "TH2D.h"
 #include "TString.h"
 #include "TROOT.h"
+#include "TH3D.h"
 
 #include <ext/hash_map>
 
@@ -112,14 +113,17 @@ public:
   //takes care of filling an histogram
   bool fillHisto  (TString name, TString tag, double valx, double weight, bool useBinWidth=false);
   bool fillHisto  (TString name, TString tag, double valx, double valy, double weight,  bool useBinWidth=false);
+  bool fillHisto  (TString name, TString tag, double valx, double valy, double valz, double weight,  bool useBinWidth=false);
   bool fillProfile(TString name, TString tag, double valx, double valy, double weight);
 
   bool fillHisto(TString name, std::vector<TString> tags, double valx, double weight,  bool useBinWidth=false);
   bool fillHisto(TString name, std::vector<TString> tags, double valx, double valy, double weight,  bool useBinWidth=false);
+  bool fillHisto(TString name, std::vector<TString> tags, double valx, double valy, double valz, double weight,  bool useBinWidth=false);
   bool fillProfile(TString name, std::vector<TString> tags, double valx, double valy, double weight);
 
   bool fillHisto(TString name, std::vector<TString> tags, double valx, std::vector<double> weights,  bool useBinWidth=false);
   bool fillHisto(TString name, std::vector<TString> tags, double valx, double valy, std::vector<double> weights,  bool useBinWidth=false);
+  bool fillHisto(TString name, std::vector<TString> tags, double valx, double valy, double valz, std::vector<double> weights,  bool useBinWidth=false);
   bool fillProfile(TString name, std::vector<TString> tags, double valx, double valy, std::vector<double> weights);
 
 

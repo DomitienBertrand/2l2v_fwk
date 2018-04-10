@@ -60,6 +60,27 @@ bool SmartSelectionMonitor::fillHisto(TString name, std::vector<TString> tags, d
 }
 
 
+// takes care of filling a 3d histogram
+bool SmartSelectionMonitor::fillHisto(TString name, TString tag, double valx, double valy, double valz, double weight, bool useBinWidth)
+{
+  TH3 *h = (TH3 *)getHisto(name,tag);
+  if(h==0) return false;
+  if(useBinWidth){ int ibin =h->FindBin(valx,valy,valz); double width = h->GetBinWidth(ibin); weight /= width; }
+  h->Fill(valx,valy,valz,weight);
+  return true;
+}
+
+bool SmartSelectionMonitor::fillHisto(TString name, std::vector<TString> tags, double valx, double valy, double valz, double weight, bool useBinWidth){
+  for(unsigned int i=0;i<tags.size();i++){fillHisto(name, tags[i], valx, valy, valz, weight, useBinWidth);}
+  return true;
+}
+
+bool SmartSelectionMonitor::fillHisto(TString name, std::vector<TString> tags, double valx, double valy, double valz, std::vector<double> weights, bool useBinWidth){
+  for(unsigned int i=0;i<tags.size();i++){fillHisto(name, tags[i], valx, valy, valz, weights[i], useBinWidth);}
+  return true;
+}
+
+
 // takes care of filling a profile
 bool SmartSelectionMonitor::fillProfile(TString name, TString tag, double valx, double valy, double weight)
 {
